@@ -9,24 +9,33 @@
 #include <sstream>
 #include "Utils.h"
 #include "Expressions/Expression.h"
+#include "Lexer.h"
+
+using namespace std;
+
 int Interpreter::interpret(std::istream& stream) {
-    std::vector<Expression> expression;
+    std::vector<Expression*> expressions = this->parse(stream);
+    for (Expression* exp : expressions) {
+        exp->calculate();
+    }
 }
 
 
-std::vector<Expression> Interpreter::parse(std::istream& stream) {
-    std::vector<Expression> result;
-    std::string line;
-    while(!stream.eof()) {
-        stream >> line;
-        std::vector<std::string> indicies = split(line,' ');
-        auto keywordIterator = m_KeywordMap.find(indicies[0]);
+std::vector<Expression*> Interpreter::parse(std::istream& stream) {
+    Lexer lexer;
+    vector<string> to_parse = lexer.lex(stream);
+    vector<Expression*> result;
+    auto parse_iterator = to_parse.begin();
+    while(parse_iterator != to_parse.end()) {
+        auto keywordIterator = m_KeywordMap.find(*parse_iterator);
+        parse_iterator++;
         if(keywordIterator == m_KeywordMap.end()) {
             throw std::exception();
         }
         auto f = keywordIterator->second;
-        result.push_back(f.create(stream));
+        result.push_back(f->create(parse_iterator));
     }
+
     return result;
 }
 

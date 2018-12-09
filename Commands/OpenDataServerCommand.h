@@ -5,6 +5,7 @@
 #ifndef PLANEINTERPRETER_OPENDATASERVERCOMMAND_H
 #define PLANEINTERPRETER_OPENDATASERVERCOMMAND_H
 #include "Command.h"
+#include <iostream>
 class OpenDataServerCommand : public Command {
 private :
     int m_Frequency;
@@ -18,7 +19,7 @@ public:
 
 
     virtual int execute() {
-        //open server.
+        std::cout << "Opening Server!" << std::endl;
     }
 };
 #endif //PLANEINTERPRETER_OPENDATASERVERCOMMAND_H

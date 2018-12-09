@@ -9,12 +9,12 @@
 #include <map>
 class Command {
 protected:
-    std::vector<Command> m_NestedCommands;
+    std::vector<Command*> m_NestedCommands;
 public :
     Command() { }
     virtual int execute() = 0;
-    virtual std::vector<Command> getNestedCommands() {
-        return m_NestedCommands;
+    virtual std::vector<Command*> getNestedCommands() {
+        return this->m_NestedCommands;
     }
 };
 #endif //PLANEINTERPRETER_COMMAND_H
