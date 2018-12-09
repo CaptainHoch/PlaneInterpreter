@@ -2,7 +2,7 @@
 // Created by elikbelik77 on 12/7/18.
 //
 
-// Tryyy
+// Try
 
 #ifndef PLANEINTERPRETER_EXPRESSIONFACTORY_H
 #define PLANEINTERPRETER_EXPRESSIONFACTORY_H
