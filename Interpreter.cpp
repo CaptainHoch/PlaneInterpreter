@@ -14,6 +14,7 @@
 using namespace std;
 
 int Interpreter::interpret(std::istream& stream) {
+
     std::vector<Expression*> expressions = this->parse(stream);
     for (Expression* exp : expressions) {
         exp->calculate();
